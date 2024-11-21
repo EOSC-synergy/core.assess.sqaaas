@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.2.1
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/vuejs/core:
+      branch: main
+      repo: https://github.com/vuejs/core
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/vuejs/core git:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-amethyst-collie.sh
+        container: qc.acc_messy-white-axolotl
+  QC.Doc:
+    repos:
+      github.com/vuejs/core find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-saffron-vulture.sh
+        container: qc.doc_baggy-chestnut-spaniel
+      github.com/vuejs/core git:
+        commands:
+        - /usr/bin/env sh .sqa/script.smelly-amethyst-pinscher.sh
+        container: qc.doc_cozy-blue-hippopotamus
+      github.com/vuejs/core markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.homey-ecru-squirt.sh
+        container: qc.doc_lumpy-myrtle-collie
+  QC.Lic:
+    repos:
+      github.com/vuejs/core licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-bistre-zonkey.sh
+        container: qc.lic_hasty-eggplant-reindeer
+  QC.Sty:
+    repos:
+      github.com/vuejs/core jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-azure-cuscus.sh
+        container: qc.sty_hasty-amber-cattle
+  QC.Ver:
+    repos:
+      github.com/vuejs/core get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-aquamarine-angora.sh
+        container: qc.ver_woolly-smalt-cockroach
+timeout: 5400
